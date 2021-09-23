@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RBProject version="2021r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<block type="Module" ID="1623103487">
+ <ObjName>StopWatch</ObjName>
+ <ObjContainerID>0</ObjContainerID>
+ <IsClass>1</IsClass>
+ <ItemFlags>1</ItemFlags>
+ <IsInterface>0</IsInterface>
+ <Compatibility></Compatibility>
+ <Method>
+  <ItemName>Start</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>Begins timing.</CodeDescription>
+  <PartID>1807452159</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Start()</SourceLine>
+   <SourceLine>/// Begins timing.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Reset</SourceLine>
+   <SourceLine>mIsRunning = True</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Reset</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>Resets all internal properties.</CodeDescription>
+  <PartID>445421567</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Reset()</SourceLine>
+   <SourceLine>/// Resets all internal properties.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>mIsRunning = False</SourceLine>
+   <SourceLine>mStart = DateTime.Now</SourceLine>
+   <SourceLine>mEnd = DateTime.Now</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Stop</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>Stops timing.</CodeDescription>
+  <PartID>563298303</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Stop()</SourceLine>
+   <SourceLine>/// Stops timing.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>mIsRunning = False</SourceLine>
+   <SourceLine>mEnd = DateTime.Now</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Elapsed</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>A read-only DateInterval representing the total elapsed time measured by the current instance.</CodeDescription>
+  <PartID>299730943</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Elapsed() As DateInterval</SourceLine>
+   <SourceLine>/// A read-only DateInterval representing the total elapsed time measured by</SourceLine>
+   <SourceLine>/// the current instance.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If mStart = Nil Then Return New DateInterval</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If mIsRunning Then</SourceLine>
+   <SourceLine>Return DateTime.Now - mStart</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Return mEnd - mStart</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult>DateInterval</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>ElapsedMilliseconds</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The total elapsed time measured by the current instance, in milliseconds.</CodeDescription>
+  <PartID>417206271</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function ElapsedMilliseconds() As Double</SourceLine>
+   <SourceLine>/// The total elapsed time measured by the current instance, in milliseconds.</SourceLine>
+   <SourceLine>/// </SourceLine>
+   <SourceLine>/// If the stopwatch has been running for &gt; 28 days then an </SourceLine>
+   <SourceLine>/// UnsupportedOperationException is raised.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Var di As DateInterval = Elapsed</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Validate.</SourceLine>
+   <SourceLine>If di.Months &gt; 0 Or di.Years &gt; 0 Then</SourceLine>
+   <SourceLine>Raise New _</SourceLine>
+   <SourceLine>UnsupportedOperationException("The stopwatch has been running too long.")</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Return (di.Days * MS_IN_DAY) + (di.Hours * MS_IN_HOUR) + _</SourceLine>
+   <SourceLine>(di.Minutes * MS_IN_MIN) + (di.Seconds * MS_IN_SEC) + _</SourceLine>
+   <SourceLine>(di.Nanoseconds / NS_IN_MS)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult>Double</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>ElapsedTicks</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The total elapsed time measured by the current instance, in ticks.</CodeDescription>
+  <PartID>627369983</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function ElapsedTicks() As Double</SourceLine>
+   <SourceLine>/// The total elapsed time measured by the current instance, in ticks.</SourceLine>
+   <SourceLine>/// </SourceLine>
+   <SourceLine>/// If the stopwatch has been running for &gt; 28 days then an </SourceLine>
+   <SourceLine>/// UnsupportedOperationException is raised.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Var di As DateInterval = Elapsed</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Validate.</SourceLine>
+   <SourceLine>If di.Months &gt; 0 Or di.Years &gt; 0 Then</SourceLine>
+   <SourceLine>Raise New _</SourceLine>
+   <SourceLine>UnsupportedOperationException("The stopwatch has been running too long.")</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Return (di.Days * TICKS_IN_DAY) + (di.Hours * TICKS_IN_HOUR) + _</SourceLine>
+   <SourceLine>(di.Minutes * TICKS_IN_MIN) + (di.Seconds * TICKS_IN_SEC) + _</SourceLine>
+   <SourceLine>(di.Nanoseconds / NS_IN_TICK)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult>Double</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Constructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>532920319</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Constructor(startImmediately As Boolean = False)</SourceLine>
+   <SourceLine>If startImmediately Then Start</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams>startImmediately As Boolean = False</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>ElapsedAsString</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>2129332223</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function ElapsedAsString() As String</SourceLine>
+   <SourceLine>/// Returns a string representation of the elapsed interval.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Var di As DateInterval = Elapsed</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di = Nil Then Return "Nil"</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Var s As String</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di.Years &gt; 0 Then</SourceLine>
+   <SourceLine>s = di.Years.ToString + " year" + If(di.Years = 1, "", "s") + ", "</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di.Months &gt; 0 Then</SourceLine>
+   <SourceLine>s = s + di.Months.ToString + " month" + If(di.Months = 1, "", "s") + ", "</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di.Days &gt; 0 Then</SourceLine>
+   <SourceLine>s = s + di.Days.ToString + " day" + If(di.Days = 1, "", "s") + ", "</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di.Minutes &gt; 0 Then</SourceLine>
+   <SourceLine>s = s + di.Minutes.ToString + " minute" + If(di.Minutes = 1, "", "s") + ", "</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di.Seconds &gt; 0 Then</SourceLine>
+   <SourceLine>s = s + di.Seconds.ToString + " second" + If(di.Seconds = 1, "", "s") + ", "</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If di.Nanoseconds &gt; 0 Then</SourceLine>
+   <SourceLine>Var ms As Integer = di.Nanoseconds / 1000000</SourceLine>
+   <SourceLine>s = s + ms.ToString + " ms"</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Return s</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
+  <ItemResult>String</ItemResult>
+ </Method>
+ <Property>
+  <ItemName>mStart</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>1458653183</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>mStart As DateTime</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>mStart As DateTime</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <IsShared>0</IsShared>
+ </Property>
+ <Property>
+  <ItemName>mEnd</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>1568446463</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>mEnd As DateTime</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>mEnd As DateTime</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <IsShared>0</IsShared>
+ </Property>
+ <Property>
+  <ItemName>mIsRunning</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>1902987263</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>mIsRunning As Boolean</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>mIsRunning As Boolean</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <IsShared>0</IsShared>
+ </Property>
+ <Property>
+  <ItemName>IsRunning</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>True if the stopwatch is currently running.</CodeDescription>
+  <PartID>2031728639</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>IsRunning As Boolean</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>IsRunning As Boolean</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <SetAccessor>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Set</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Set</SourceLine>
+  </SetAccessor>
+  <GetAccessor>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Get</SourceLine>
+   <SourceLine>Return mIsRunning</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Get</SourceLine>
+  </GetAccessor>
+ </Property>
+ <ViewBehavior>
+  <ViewProperty>
+   <ObjName>Name</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Index</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <PropertyValue>-2147483648</PropertyValue>
+   <ItemType>Integer</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Super</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Left</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <ItemType>Integer</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Top</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <ItemType>Integer</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>IsRunning</ObjName>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <ItemType>Boolean</ItemType>
+  </ViewProperty>
+ </ViewBehavior>
+ <Constant>
+  <ItemName>MS_IN_MIN</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of milliseconds in a minute.</CodeDescription>
+  <PartID>1365798911</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>60000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>MS_IN_SEC</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of milliseconds in a second.</CodeDescription>
+  <PartID>1444937727</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>1000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>MS_IN_HOUR</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of milliseconds in an hour.</CodeDescription>
+  <PartID>2125772799</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>3.6e+6</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>MS_IN_DAY</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of milliseconds in a day.</CodeDescription>
+  <PartID>409004031</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>86400000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>MS_IN_WEEK</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of milliseconds in a week.</CodeDescription>
+  <PartID>99479551</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>604800000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>NS_IN_MS</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of nanoseconds in a millisecond.</CodeDescription>
+  <PartID>246343679</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>1000000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>TICKS_IN_SEC</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of ticks in a second.</CodeDescription>
+  <PartID>1544744959</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>60</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>TICKS_IN_MIN</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of ticks in a minute.</CodeDescription>
+  <PartID>937689087</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>3600</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>TICKS_IN_HOUR</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of ticks in an hour.</CodeDescription>
+  <PartID>1080932351</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>216000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>TICKS_IN_DAY</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of ticks in a day.</CodeDescription>
+  <PartID>1574150143</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>5184000</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>NS_IN_TICK</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <CodeDescription>The number of nanoseconds in a tick.</CodeDescription>
+  <PartID>247576575</PartID>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemType>2</ItemType>
+  <ItemDef>16666666.67</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+</block>
+</RBProject>
