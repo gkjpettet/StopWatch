@@ -137,6 +137,7 @@ Begin Window Window1
       Underline       =   False
       Visible         =   True
       Width           =   560
+      _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin PushButton ButtonReset

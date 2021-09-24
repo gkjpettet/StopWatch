@@ -111,7 +111,7 @@
   <PartID>417206271</PartID>
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
-   <SourceLine>Function ElapsedMilliseconds() As Double</SourceLine>
+   <SourceLine>Function ElapsedMilliseconds() As Integer</SourceLine>
    <SourceLine>/// The total elapsed time measured by the current instance, in milliseconds.</SourceLine>
    <SourceLine>/// </SourceLine>
    <SourceLine>/// If the stopwatch has been running for &gt; 28 days then an </SourceLine>
@@ -136,7 +136,7 @@
   <ItemFlags>0</ItemFlags>
   <IsShared>0</IsShared>
   <ItemParams></ItemParams>
-  <ItemResult>Double</ItemResult>
+  <ItemResult>Integer</ItemResult>
  </Method>
  <Method>
   <ItemName>ElapsedTicks</ItemName>
@@ -146,7 +146,7 @@
   <PartID>627369983</PartID>
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
-   <SourceLine>Function ElapsedTicks() As Double</SourceLine>
+   <SourceLine>Function ElapsedTicks() As Integer</SourceLine>
    <SourceLine>/// The total elapsed time measured by the current instance, in ticks.</SourceLine>
    <SourceLine>/// </SourceLine>
    <SourceLine>/// If the stopwatch has been running for &gt; 28 days then an </SourceLine>
@@ -171,7 +171,7 @@
   <ItemFlags>0</ItemFlags>
   <IsShared>0</IsShared>
   <ItemParams></ItemParams>
-  <ItemResult>Double</ItemResult>
+  <ItemResult>Integer</ItemResult>
  </Method>
  <Method>
   <ItemName>Constructor</ItemName>
